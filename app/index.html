@@ -3,20 +3,55 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Vice Nights — GTA 6-style cover art maker</title>
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
+  <section class="controls" aria-label="Cover controls">
+    <h1>Vice Nights</h1>
+    <p class="tag">A GTA 6-style cover art maker. Load a photo, arrange the
+    panels, write the caption, export a poster PNG.</p>
+
+    <fieldset>
+      <legend>Post size</legend>
+      <div class="sizes" id="sizes">
+        <button type="button" data-size="square" class="on" aria-pressed="true">1080 × 1080</button>
+        <button type="button" data-size="portrait" aria-pressed="false">1080 × 1350</button>
+        <button type="button" data-size="wide" aria-pressed="false">1920 × 1080</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Photos</legend>
+      <div class="slots" id="slots"></div>
+      <p class="hint">Or use a sample: it is free to use.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Panels — click a panel in the preview to select it</legend>
+      <div class="panels" id="panels"></div>
+      <label>Zoom <input id="zoom" type="range" min="1" max="3" step="0.01" value="1"></label>
+      <label>Move left–right <input id="ox" type="range" min="-0.5" max="0.5" step="0.01" value="0"></label>
+      <label>Move up–down <input id="oy" type="range" min="-0.5" max="0.5" step="0.01" value="0"></label>
+      <button id="center" type="button" class="ghost">Centre the photo</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Caption</legend>
+      <label>Title <input id="title" type="text" maxlength="30" value="SUNSET HEIST"></label>
+      <label>Tagline <input id="tagline" type="text" maxlength="40" value="a neon story"></label>
+      <label>Sunset grade <input id="grade" type="range" min="0" max="1" step="0.05" value="0.8"></label>
+    </fieldset>
+
+    <button id="export" type="button" class="primary">Export PNG</button>
     <p id="status" role="status"></p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <section class="preview">
+    <canvas id="cover" width="1080" height="1080" aria-label="The cover preview"></canvas>
+    <p class="hint">Drag a panel's photo to move it · scroll over it to zoom</p>
+  </section>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
